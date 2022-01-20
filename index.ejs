@@ -1,0 +1,183 @@
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <title>멜론 알리미</title>
+</head>
+
+<style>
+    @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+
+    body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .move {
+        margin-top: 5px;
+        font-weight: 600;
+        color: gray;
+    }
+
+    .wrap_content {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        padding-bottom: 100px;
+        background-color: rgb(233, 233, 233);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left_left {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .main_title {
+        font-family: 'NanumSquare', sans-serif;
+        display: flex;
+        width: 100%;
+        height: 400px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        font-size: 30px;
+    }
+
+    .floor {
+        font-family: 'NanumSquare', sans-serif;
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+        background-color: white;
+        border: 1px solid white;
+        border-radius: 15px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+
+        height: 70px;
+    }
+
+    .left {
+        display: flex;
+        align-items: center;
+    }
+
+    .rank {
+        font-size: 18px;
+        width: 60px;
+        display: flex;
+        justify-content: center;
+        font-weight: 600;
+    }
+
+    .right {
+        width: 60%;
+        margin-left: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .wrap_title {
+        display: flex;
+        flex-direction: row;
+        font-weight: 700;
+    }
+
+    .title {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .melon {
+        color: rgb(81, 171, 76);
+        font-weight: 600;
+    }
+
+    .small {
+        margin-top: 20px;
+        font-size: 18.5px;
+    }
+
+    footer {
+        margin-top: 60px;
+        color: gray;
+    }
+
+</style>
+
+<body>
+<div class="wrap_content">
+
+    <div class="main_title">
+        <div class="wrap_title">
+            임영웅 실시간&nbsp;<span class="melon"> 멜론 </span>&nbsp;순위
+        </div>
+
+        <br />
+
+        <div class="small">
+            <%= time %>
+        </div>
+        <div class="small">
+            <%= data.length %>개 곡이 차트에 있습니다.
+        </div>
+
+
+    </div>
+
+    <% for (var i=0; i < data.length;  i ++) { %>
+            <div class="floor">
+
+                <div class="left">
+                    <div class="left_left">
+                        <div class="rank">
+                            <%= data[i].rank %>
+                        </div>
+                        <div class="move">
+                            <% if (data[i].rank_move === '순위 동일') { %>
+                                -
+                            <% } %>
+                            <% if (data[i].rank_move === '단계 상승') { %>
+                                <style> .up { color: #cb7474;} </style>
+                                <div class="up">
+                                    ▲ <%= data[i].up_value %>
+                                </div>
+                            <% } %>
+                            <% if (data[i].rank_move === '단계 하락') { %>
+                                <style> .down { color: #4f4fcb;} </style>
+                                <div class="down">
+                                    ▼ <%= data[i].down_value %>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="image_url">
+                        <img src="<%= data[i].image_url %>" class="img" width="70px"/>
+                    </div>
+                </div>
+
+                <div class="right">
+                    <div class="title">
+                        <%= data[i].title %>
+                    </div>
+                    <div class="artist">
+                        <%= data[i].artist %>
+                    </div>
+                </div>
+            </div>
+    <% } %>
+
+    <footer>
+        개발자: 이하람
+    </footer>
+
+</div>
+</body>
